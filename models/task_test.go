@@ -34,8 +34,6 @@ func TestAddTask(t *testing.T) {
 	}
 }
 
-
-
 func TestGetNextID(t *testing.T) {
 	// 1. Test on an empty list
 	tl := &TaskList{}

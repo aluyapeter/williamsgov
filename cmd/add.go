@@ -1,32 +1,58 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"strings"
+
+	"github.com/aluyapeter/williamsgov/models"
 
 	"github.com/spf13/cobra"
 )
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
-	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Use:   "add [task title]",
+	Short: "Add a new task",
+	Long: `Add a new task to your task list. Also, you can optionally add a description of your task using the --description flag
+	
+	Examples:
+	williamsgo add "Buy beans"
+	williams go add "work on project" --description "remember to complete before deadline"
+	williamsgo add "call colleague" -d "weekly meeting"`,
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Args: cobra.MinimumNArgs(1),
+
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("add called")
+		title := strings.Join(args, " ")
+		description, _ := cmd.Flags().GetString("description")
+
+		taskList, err := models.LoadTasks()
+		if err != nil {
+			fmt.Printf("Error loading tasks: %v\n", err)
+			return
+		}
+
+		taskList.AddTask(title, description)
+
+		err = models.SaveTasks(taskList)
+		if err != nil {
+			fmt.Printf("❌ Error savig tasks: %v\n", err)
+		}
+
+		fmt.Printf("✅ Task added successfully: '%s'\n", title)
+		if description != "" {
+			fmt.Printf("Description: %s\n", description)
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(addCmd)
+
+	addCmd.Flags().StringP("description", "d", "", "optional description")
 
 	// Here you will define your flags and configuration settings.
 
