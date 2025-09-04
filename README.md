@@ -37,7 +37,7 @@ After building, you can run commands like this:
 ```bash
 ./williamsgov list
 ```
-Use [williamsgov list --all] to list both completed and non-completed tasks
+Use [./williamsgov list --all] to list both completed and non-completed tasks
 
 ## Mark a task as completed (using the id of the task):
 ```bash
