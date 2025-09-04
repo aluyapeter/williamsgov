@@ -1,6 +1,3 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -18,7 +15,7 @@ var listCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		taskList, err := models.LoadTasks()
 		if err != nil {
-			fmt.Printf("Error loading tasks: %v\n", err)
+			fmt.Printf("❌ Error loading tasks: %v\n", err)
 			return
 		}
 
@@ -36,7 +33,7 @@ var listCmd = &cobra.Command{
 		// 	fmt.Printf("%s %d. %s\n", status, i+1, task.Title)
 		// }
 		if len(taskList.Tasks) == 0 {
-			fmt.Println("No tasks found. Add some tasks to get started using 'williamsgo add \"your task here\"'")
+			fmt.Println("❌ No tasks found. Add some tasks to get started using 'williamsgo add \"your task here\"'")
 			return
 		}
 
@@ -62,10 +59,10 @@ var listCmd = &cobra.Command{
 				fmt.Printf("Description: %s\n", task.Description)
 			}
 
-			fmt.Printf("   📅 Created: %s\n", task.CreatedAt.Format("2006-01-02 15:04:05"))
+			fmt.Printf("📅 Created: %s\n", task.CreatedAt.Format("2006-01-02 15:04:05"))
 			
 			if task.Completed && task.CompletedAt != nil {
-				fmt.Printf("   ✅ Completed: %s\n", task.CompletedAt.Format("2006-01-02 15:04:05"))
+				fmt.Printf("✅ Completed: %s\n", task.CompletedAt.Format("2006-01-02 15:04:05"))
 			}
 
 			displayedCount++
@@ -84,14 +81,4 @@ func init() {
 	rootCmd.AddCommand(listCmd)
 
 	listCmd.Flags().BoolP("all", "a", false, "Show all tasks including completed ones")
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// listCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// listCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

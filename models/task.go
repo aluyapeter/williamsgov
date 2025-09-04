@@ -107,13 +107,13 @@ func (tl *TaskList) CompleteTask(id int) error {
 	return fmt.Errorf("task with ID %d not found", id)
 }
 
-func (tl *TaskList) DeleteTask(id int) (string, error ){
+func (tl *TaskList) DeleteTask(id int) error{
 	for i, task := range tl.Tasks {
 		if task.ID == id {
 			tl.Tasks = append(tl.Tasks[:i], tl.Tasks[i+1:]... )
-			return fmt.Sprintf("deleted task with id: %d", id), nil
+			return nil
 		}
 	}
 
-	return "", fmt.Errorf("task with ID %d not found", id)
+	return fmt.Errorf("task with ID %d not found", id)
 }

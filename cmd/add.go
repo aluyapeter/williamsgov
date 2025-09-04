@@ -1,6 +1,3 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -19,9 +16,9 @@ var addCmd = &cobra.Command{
 	Long: `Add a new task to your task list. Also, you can optionally add a description of your task using the --description flag
 	
 	Examples:
-	williamsgo add "Buy beans"
-	williams go add "work on project" --description "remember to complete before deadline"
-	williamsgo add "call colleague" -d "weekly meeting"`,
+	williamsgov add "Buy beans"
+	williamsgov add "work on project" --description "remember to complete before deadline"
+	williamsgov add "call colleague" -d "weekly meeting"`,
 
 	Args: cobra.MinimumNArgs(1),
 
@@ -31,7 +28,7 @@ var addCmd = &cobra.Command{
 
 		taskList, err := models.LoadTasks()
 		if err != nil {
-			fmt.Printf("Error loading tasks: %v\n", err)
+			fmt.Printf("❌ Error loading tasks: %v\n", err)
 			return
 		}
 
@@ -53,14 +50,4 @@ func init() {
 	rootCmd.AddCommand(addCmd)
 
 	addCmd.Flags().StringP("description", "d", "", "optional description")
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// addCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// addCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

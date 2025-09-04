@@ -81,7 +81,7 @@ func TestDeleteTask(t *testing.T) {
 	taskIDToDelete := tl.Tasks[0].ID
 
 	// 1. Test deleting an existing task
-	msg, err := tl.DeleteTask(taskIDToDelete)
+	err := tl.DeleteTask(taskIDToDelete)
 	if err != nil {
 		t.Errorf("Did not expect an error when deleting a task, but got %v", err)
 	}
@@ -91,12 +91,9 @@ func TestDeleteTask(t *testing.T) {
 	if tl.Tasks[0].ID == taskIDToDelete {
 		t.Error("The deleted task is still in the list")
 	}
-    if msg == "" {
-        t.Error("Expected a success message, but got an empty string")
-    }
 
 	// 2. Test deleting a non-existent task
-	_, err = tl.DeleteTask(999)
+	err = tl.DeleteTask(999)
 	if err == nil {
 		t.Error("Expected an error when deleting a non-existent task, but got nil")
 	}
