@@ -30,23 +30,23 @@ This tool lets you add, list, complete, and delete tasks directly from your term
 After building, you can run commands like this:
 ## Add a task:
 ```bash
-willlaimsgov add "Task title" -d "Task description"
+./willlaimsgov add "Task title" -d "Task description"
 ```
 
 ## Get the list of all non-completed tasks, organized by their ID:
 ```bash
-williamsgov list
+./williamsgov list
 ```
 Use [williamsgov list --all] to list both completed and non-completed tasks
 
 ## Mark a task as completed (using the id of the task):
 ```bash
-williamsgov done 1
+./williamsgov done 1
 ```
 
 ## Delete a task by ID:
 ```bash
-williamsgov delete 1
+./williamsgov delete 1
 ```
 
 ---
